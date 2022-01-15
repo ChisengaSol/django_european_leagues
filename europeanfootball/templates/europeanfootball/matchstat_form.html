@@ -1,0 +1,60 @@
+{% extends "europeanfootball/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert alert-info">Add new match</h4>
+        <form action="" method="post" autocomplete="off">  
+            {% csrf_token %}     
+            {{form.league|as_crispy_field}}  
+            {{form.date|as_crispy_field}}  
+            {{form.home_team_id|as_crispy_field}} 
+            {{form.home_team_goal|as_crispy_field}} 
+            {{form.away_team_id|as_crispy_field}} 
+            {{form.away_team_goal|as_crispy_field}}  
+            <input type="submit" class="btn btn-success" value="SUBMIT">
+        </form>
+    </div>
+    <div class="col-sm-7 offset-1">
+        <h4 class="text-center alert alert-info">Matches Information</h4>
+        {% if data %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>League</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Home Team</th>
+                        <th scope="col">Home Team Score</th>
+                        <th scope="col">Away Team</th>
+                        <th scope="col">Away Team Score</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in data %}
+                    <tr>
+                        <th scope="row">{{result.league}}</th>
+                        <td>{{result.date}}</td>
+                        <td>{{result.home_team_id}}</td>
+                        <td>{{result.home_team_goal}}</td>
+                        <td>{{result.away_team_id}}</td>
+                        <td>{{result.away_team_goal}}</td>
+                        <td>
+                            <a href= "{% url 'matchstatsupdate' result.id %}" class="btn btn-warning btn-sm">Update</a>
+                            <form action="{% url 'matchstatsdel' result.id %}" method ="post" class="d-inline">{% csrf_token %} 
+                                <input type="submit" class ="btn btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        {% else %}
+            <h4 class="text-center alert alert-warning">No match records</h4>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}

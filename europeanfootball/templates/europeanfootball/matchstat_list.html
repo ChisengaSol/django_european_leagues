@@ -1,0 +1,13 @@
+{% extends "europeanfootball/base.html" %}
+
+{% block content %}
+<p>Show list of stats</p>
+{% for result in data %}
+    {{result.league}}
+    {{result.date}}
+    {{result.home_team_id}}
+    {{result.home_team_goal}}
+    {{result.away_team_id}}
+    {{result.away_team_goal}}
+{% endfor %}
+{% endblock content %}
