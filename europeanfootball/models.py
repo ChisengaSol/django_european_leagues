@@ -5,7 +5,7 @@ class Country(models.Model):
     country_id = models.IntegerField(primary_key=True)
     country_name = models.CharField(max_length=255)
     class Meta:
-        db_table = "lountry"
+        db_table = "country"
 
 class League(models.Model):
     league_id = models.IntegerField(primary_key=True)

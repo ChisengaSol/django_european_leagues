@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'footbal_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dj3h8gk553tge',
-        'USER': 'mpofnybqxjuzej',
-        'PASSWORD': 'eda8a91d764b4c33b4079527fb830a99707069e325f9e63ecd277ba2e6de1dbc',
-        'HOST': 'ec2-18-210-159-154.compute-1.amazonaws.com',
+        'NAME': 'decsrosnt2dhh0',
+        'USER': 'tenaddwnkksfdp',
+        'PASSWORD': '896ad4f701a6055ba52613149b853c90331cf9ff6d4f69ea842c6e452800315c',
+        'HOST': 'ec2-34-230-198-12.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
