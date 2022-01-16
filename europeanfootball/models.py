@@ -16,6 +16,16 @@ class League(models.Model):
     def __str__(self):
         return str(self.league_id)
 
+class Team(models.Model):
+    team_id= models.IntegerField(primary_key=True)
+    team_short_name = models.CharField(max_length=255)
+    team_long_name = models.CharField(max_length=255)
+    league = models.ForeignKey(League,on_delete = models.CASCADE)  
+    class Meta:
+        db_table = "team"  
+    def __str__(self):
+        return str(self.team_id)
+
 class Matchstats(models.Model):
     id = models.AutoField(primary_key=True)
     league = models.ForeignKey(League,on_delete = models.CASCADE)

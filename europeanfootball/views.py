@@ -1,6 +1,6 @@
 from urllib import request
 from django.shortcuts import render, HttpResponseRedirect
-from .models import Matchstats
+from .models import Matchstats, Team
 from .forms import MatchDetailsForm
 
 #things for pagination
@@ -31,8 +31,8 @@ def matchstat_form(req):
     p = Paginator(results,15)
     page = req.GET.get('page')
     matches = p.get_page(page)
-    print("The number of pages is: ",p.num_pages)
-    return render(req,"europeanfootball/matchstat_form.html", {'form':form,'data':results, 'matches':matches})
+    team_info = Team.objects.all().values('team_id','team_long_name')    
+    return render(req,"europeanfootball/matchstat_form.html", {'form':form,'data':results, 'matches':matches,'team_info':team_info})
 
 def matchstat_del(req, id):
     """Function to delete record from database"""

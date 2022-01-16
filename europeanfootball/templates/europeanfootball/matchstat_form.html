@@ -4,7 +4,7 @@
 {% block content %}
 <div class="row">
     <div class="col-sm-4">
-        <h4 class="text-center alert alert-info">Add new match</h4>
+        <h4 class="text-center alert alert-primary">Add new match</h4>
         <form action="" method="post" autocomplete="off">  
             {% csrf_token %}     
             {{form.league|as_crispy_field}}  
@@ -13,40 +13,41 @@
             {{form.home_team_goal|as_crispy_field}} 
             {{form.away_team_id|as_crispy_field}} 
             {{form.away_team_goal|as_crispy_field}}  
-            <input type="submit" class="btn btn-success" value="SUBMIT">
+            <br>
+            <input type="submit" class="btn btn-dark" value="SUBMIT">
         </form>
     </div>
     <div class="col-sm-7 offset-1">
-        <h4 class="text-center alert alert-info">Matches Information</h4>
+        <h4 class="text-center alert alert-primary">Matches Information</h4>
         {% if data %}
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>League</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Home Team</th>
-                        <th scope="col">Home Team Score</th>
-                        <th scope="col">Away Team</th>
-                        <th scope="col">Away Team Score</th>
+                        <th scope="col">Home ID</th>
+                        <th scope="col">Home Score</th>
+                        <th scope="col">Away ID</th>
+                        <th scope="col">Away Score</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for result in matches %}
-                    <tr>
-                        <th scope="row">{{result.league}}</th>
-                        <td>{{result.date}}</td>
-                        <td>{{result.home_team_id}}</td>
-                        <td>{{result.home_team_goal}}</td>
-                        <td>{{result.away_team_id}}</td>
-                        <td>{{result.away_team_goal}}</td>
-                        <td>
-                            <a href= "{% url 'matchstatsupdate' result.id %}" class="btn btn-warning btn-sm">Update</a>
-                            <form action="{% url 'matchstatsdel' result.id %}" method ="post" class="d-inline">{% csrf_token %} 
-                                <input type="submit" class ="btn btn-danger" value="Delete">
-                            </form>
-                        </td>
-                    </tr>
+                            <tr>
+                                <th scope="row">{{result.league}}</th>
+                                <td>{{result.date}}</td>
+                                <td>{{result.home_team_id}}</td>
+                                <td>{{result.home_team_goal}}</td>
+                                <td>{{result.away_team_id}}</td>
+                                <td>{{result.away_team_goal}}</td>
+                                <td>
+                                    <a href= "{% url 'matchstatsupdate' result.id %}" class="btn btn-dark btn-sm">Update</a>
+                                    <form action="{% url 'matchstatsdel' result.id %}" method ="post" class="d-inline">{% csrf_token %} 
+                                        <input type="submit" class ="btn btn-danger" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
                     {% endfor %}
                 </tbody>
 
@@ -60,13 +61,13 @@
 <br>
 
 {% if matches.has_previous %}
-    <a href="?page=1" class="btn btn-info mb-4">&laquo Page 1</a>
-    <a href="?page={{matches.previous_page_number}}" class="btn btn-info mb-4">Previous</a>
+    <a href="?page=1" class="btn btn-dark mb-4">&laquo Page 1</a>
+    <a href="?page={{matches.previous_page_number}}" class="btn btn-dark mb-4">Previous</a>
 {% endif %}
 Page {{ matches.number }} of {{ matches.paginator.num_pages }}
 
 {% if matches.has_next %}
-    <a href="?page={{matches.next_page_number}}" class="btn btn-info mb-4">Next</a>
-    <a href="?page = {{matches.paginator.num_pages}}" class="btn btn-info mb-4"> Last &raquo</a>
+    <a href="?page={{matches.next_page_number}}" class="btn btn-dark mb-4">Next</a>
+    <a href="?page={{matches.paginator.num_pages}}" class="btn btn-dark mb-4"> Last &raquo</a>
 {% endif %}
 {% endblock content %}
