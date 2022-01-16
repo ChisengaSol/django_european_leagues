@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn europeanfootball.wsgi --log-file=-
+web: gunicorn footbal_project.wsgi --log-file=-
