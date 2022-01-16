@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for result in data %}
+                    {% for result in matches %}
                     <tr>
                         <th scope="row">{{result.league}}</th>
                         <td>{{result.date}}</td>
@@ -57,4 +57,16 @@
     </div>
 
 </div>
+<br>
+
+{% if matches.has_previous %}
+    <a href="?page=1" class="btn btn-info mb-4">&laquo Page 1</a>
+    <a href="?page={{matches.previous_page_number}}" class="btn btn-info mb-4">Previous</a>
+{% endif %}
+Page {{ matches.number }} of {{ matches.paginator.num_pages }}
+
+{% if matches.has_next %}
+    <a href="?page={{matches.next_page_number}}" class="btn btn-info mb-4">Next</a>
+    <a href="?page = {{matches.paginator.num_pages}}" class="btn btn-info mb-4"> Last &raquo</a>
+{% endif %}
 {% endblock content %}

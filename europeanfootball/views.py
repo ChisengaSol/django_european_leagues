@@ -1,19 +1,16 @@
+from urllib import request
 from django.shortcuts import render, HttpResponseRedirect
 from .models import Matchstats
 from .forms import MatchDetailsForm
-from datetime import datetime
 
-def matchstat_list(req):
-    #results = Matchstats.objects.all()
-    #return render(req, "europeanfootball/matchstat_list.html",{'data':results})
-    return 
+#things for pagination
+from django.core.paginator import Paginator
 
 def matchstat_form(req):
-    '''
+    """
         Function displays records and adds records to the database
-        ('league','home_team_id','home_team_goal','away_team_id','away_team_goal')
-        now.strftime("%d/%m/%Y %H:%M:%S")
-    '''
+    """
+    #pagination setup
     if req.method == "POST":
         form = MatchDetailsForm(req.POST)
         if form.is_valid():
@@ -30,25 +27,30 @@ def matchstat_form(req):
 
     else:
         form = MatchDetailsForm()
-    results = Matchstats.objects.all()
-    return render(req,"europeanfootball/matchstat_form.html", {'form':form,'data':results})
+    results = Matchstats.objects.all().order_by('-id')
+    p = Paginator(results,15)
+    page = req.GET.get('page')
+    matches = p.get_page(page)
+    print("The number of pages is: ",p.num_pages)
+    return render(req,"europeanfootball/matchstat_form.html", {'form':form,'data':results, 'matches':matches})
 
 def matchstat_del(req, id):
     """Function to delete record from database"""
     if req.method == "POST":
-        pi = Matchstats.objects.get(pk = id)
-        pi.delete()
+        match = Matchstats.objects.get(pk = id)
+        match.delete()
         return HttpResponseRedirect('/eurofootball/')
 
 def update_matchstats(req,id):
+    """Update records  in the DB"""
     if req.method == "POST":
-        pi = Matchstats.objects.get(pk = id)
-        form = MatchDetailsForm(req.POST, instance = pi)
+        match = Matchstats.objects.get(pk = id)
+        form = MatchDetailsForm(req.POST, instance = match)
         if form.is_valid():
             form.save()
     else:
-        pi = Matchstats.objects.get(pk = id)
-        form = MatchDetailsForm(instance = pi)
+        match = Matchstats.objects.get(pk = id)
+        form = MatchDetailsForm(instance = match)
     return render(req, "europeanfootball/update_matchstats.html",{'form':form})
     
 
