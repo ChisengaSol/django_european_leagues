@@ -1,13 +1,6 @@
 {% extends "europeanfootball/base.html" %}
 {% load crispy_forms_tags %}
 
-{% for msg in messages %}
-    <div class="alert alert-success" role="alert">
-    <p>{{msg}}</p>
-    <hr>
-  </div>
-{% endfor %}
-
 {% block content %}
     <div class="row">
         <div class="col-sm-8 offset-2">
@@ -21,8 +14,8 @@
                 {{form.away_team_id|as_crispy_field}} 
                 {{form.away_team_goal|as_crispy_field}} 
                 <br> 
-                <input type="submit" class="btn btn-success" value="SUBMIT">
-                <a href= "{% url 'home' %}" class="btn btn-info">BACK TO HOME</a>
+                <input type="submit" class="btn btn-dark" value="SUBMIT">
+                <a href= "{% url 'home' %}" class="btn btn-primary">BACK TO HOME</a>
             </form>
         </div>
     </div>
