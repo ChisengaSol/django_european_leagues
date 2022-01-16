@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-z4h0b$re$xrb5(^1-z8^q2oc+8z)ce6dp0xi_eh!-_qemspo2_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ddah.herokuapp.com']
 
 
 # Application definition
@@ -80,11 +82,11 @@ WSGI_APPLICATION = 'footbal_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'european_football_leagues_db',
-        'USER': 'postgres',
-        'PASSWORD': 'tony88179',
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'NAME': 'dj3h8gk553tge',
+        'USER': 'mpofnybqxjuzej',
+        'PASSWORD': 'eda8a91d764b4c33b4079527fb830a99707069e325f9e63ecd277ba2e6de1dbc',
+        'HOST': 'ec2-18-210-159-154.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -123,7 +125,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+#STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
