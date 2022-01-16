@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-z4h0b$re$xrb5(^1-z8^q2oc+8z)ce6dp0xi_eh!-_qemspo2_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ddah.herokuapp.com']
+ALLOWED_HOSTS = ['https://footballleagues.herokuapp.com/']
 
 
 # Application definition
