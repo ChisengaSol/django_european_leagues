@@ -39,7 +39,7 @@ def matchstat_del(req, id):
     if req.method == "POST":
         match = Matchstats.objects.get(pk = id)
         match.delete()
-        return HttpResponseRedirect('/eurofootball/')
+        return HttpResponseRedirect('/')
 
 def update_matchstats(req,id):
     """Update records  in the DB"""
